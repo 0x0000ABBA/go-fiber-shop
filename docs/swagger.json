@@ -1,0 +1,21 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a simple (yet) Shop api build using Fiber and Go.",
+        "title": "Fiber Shop API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "paths": {
+        "/metrics/heartbeat": {
+            "get": {
+                "description": "Simple heartbeat controller",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+    }
+}
