@@ -4,8 +4,10 @@ import (
 	"fiber-shop/internal/config"
 	"fiber-shop/internal/routes"
 	"fiber-shop/pkg/logger"
+	"fiber-shop/pkg/pgsql"
 	"fiber-shop/pkg/utils"
 	"log"
+	"time"
 
 	_ "fiber-shop/docs"
 
@@ -18,12 +20,6 @@ import (
 // @description This is a simple (yet) Shop api build using Fiber and Go.
 func main() {
 
-	log.Println("Initializing config")
-
-	config := config.GetConfig()
-
-	log.Println("Config initialized")
-
 	log.Println("Initializing logger")
 
 	l := logger.NewLogger("go-fiber-shop: ")
@@ -34,7 +30,22 @@ func main() {
 
 	a := fiber.New()
 
+
 	l.Println("App defined")
+
+	pgCfg := pgsql.NewConfig("postgres", "Qweasdzxc4", "192.168.1.150", "5432", "store")
+
+	pgsql.NewGlClient(1, 1 * time.Second, pgCfg, l)
+
+	defer pgsql.ConnPool.Close()
+
+	testConn, err := pgsql.ConnPool.Acquire()
+
+	if err != nil {
+		l.Fatal(err)
+	}
+
+	l.Println(testConn.Query("SELECT * FROM public.user"))
 
 	l.Println("Middleware initializing")
 
@@ -47,14 +58,19 @@ func main() {
 
 	routes.Swagger(a)
 	routes.Metrics(a)
+	routes.User(a)
 
 	// TODO routes
 	l.Println("Routes initialized")
 
 	l.Println("Starting server")
 
-	url := config.Listen.BindIP+":"+config.Listen.Port
+	ip := config.GetConfigValue("BIND_IP")
 
-	utils.StartServerWithGracefulShutdown(a, url, l)
+	port := config.GetConfigValue("PORT")
+
+	url := ip + ":" + port
+
+	utils.StartServer(a, url, l)
 
 }

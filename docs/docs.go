@@ -25,6 +25,16 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/user/": {
+            "get": {
+                "description": "Returns all users",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
         }
     }
 }`

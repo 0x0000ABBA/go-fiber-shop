@@ -16,7 +16,7 @@ func StartServer(a *fiber.App, url string, l *log.Logger) {
 }
 
 // Starting server with graceful shutdown
-func StartServerWithGracefulShutdown(a *fiber.App, url string, l *log.Logger) {
+func StartServerWithGracefulShutdown(a *fiber.App, url string, l *log.Logger) { // TODO fix this
 
 	l.Printf("Starting server on %s",  url)
 

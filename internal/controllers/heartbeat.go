@@ -2,10 +2,14 @@ package controllers
 
 import "github.com/gofiber/fiber/v2"
 
-// Heartbeat is a simple heartbeat controller
-// @Description Simple heartbeat controller
-// @Success 200
-// @Router /metrics/heartbeat [get]
+
+// GetHeartbeat returns a status code to indicate server is alive
+// @Description Returns a status code to indicate server is alive
+// @Success 200 {string} string "Server is alive"
+// @Router /heartbeat [get]
 func GetHeartbeat(c *fiber.Ctx) error {
-	return c.Status(fiber.StatusNoContent).SendString("")
+    // Respond with a 204 No Content status code
+    return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"message": "Server is alive",
+	})
 }

@@ -10,4 +10,10 @@ paths:
       responses:
         "200":
           description: OK
+  /user/:
+    get:
+      description: Returns all users
+      responses:
+        "200":
+          description: OK
 swagger: "2.0"
