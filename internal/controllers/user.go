@@ -31,6 +31,7 @@ func GetAllUsers(c *fiber.Ctx) error {
 // @Success 200 {object} models.User
 // @Router /user/{id} [get]
 func GetUserById(c *fiber.Ctx) error {
+	
 	id := c.Params("id")
 
 	if !utils.IsValidUUID(id) {

@@ -10,6 +10,6 @@ func GetProductById(id string) (models.Product, error) {
 	return models.Product{}, nil // TODO implement me
 }
 
-func AddProduct(p *models.Product) error {
-	return nil // TODO implement me
+func AddProduct(p *models.Product) (models.Product, error) {
+	return models.Product{}, nil // TODO implement me
 }

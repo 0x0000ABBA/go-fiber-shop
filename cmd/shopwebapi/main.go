@@ -3,7 +3,9 @@ package main
 import (
 	"fiber-shop/internal/config"
 	"fiber-shop/internal/routes"
-	"fiber-shop/pkg/logger"
+	"os"
+
+	"fiber-shop/pkg/middleware"
 	"fiber-shop/pkg/pgsql"
 	"fiber-shop/pkg/utils"
 	"log"
@@ -12,17 +14,23 @@ import (
 	_ "fiber-shop/docs"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/middleware/cors"
+	// "github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/gofiber/fiber/v2/middleware/logger"
 )
+
 
 // @title Fiber Shop API
 // @version 1.0
 // @description This is a simple (yet) Shop api build using Fiber and Go.
 func main() {
+	JWT_SECRET := "jwt_secret" //FIXME this is stupid
+	//TODO make config load from env once before app started
+
+
 
 	log.Println("Initializing logger")
 
-	l := logger.NewLogger("go-fiber-shop: ")
+	l := log.New(os.Stdout, "go-fiber-store: ", log.LstdFlags)
 
 	l.Println("Logger initialized")
 
@@ -32,6 +40,9 @@ func main() {
 
 
 	l.Println("App defined")
+
+
+	
 
 	pgCfg := pgsql.NewConfig("postgres", "Qweasdzxc4", "192.168.1.150", "5432", "store")
 
@@ -49,8 +60,18 @@ func main() {
 
 	l.Println("Middleware initializing")
 
+
+	a.Use(logger.New(logger.Config{
+		Format: "[${ip}]:${port} ${status} - ${method} ${path}\n",
+	}))
 	a.Use(cors.New())
+
+	
+
+	// a.Use(middleware.JwtProtected(JWT_SECRET))
+	
 	//TODO middlewares
+	//TODO auth middleware
 
 	l.Println("Middleware initialized")
 

@@ -77,21 +77,20 @@ func PostProduct(c *fiber.Ctx) error {
 
 	if product.Name == "" || product.Prices == nil { // TODO validation
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-			"message": "Name and price are required fields",
+			"message": "Name and price is required",
 		})
 	}
 
-	err = services.AddProduct(&product)
+	p, err := services.AddProduct(&product)
 
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"message": "Product could not be added to the database",
+			"message": "Product can not be added",
 		})
 	}
 
 	return c.Status(fiber.StatusCreated).JSON(fiber.Map{
 		"message":      "Product created successfully",
-		"product_name": product.Name,
-		"product_id":   product.Id,
+		"product_id":   p.Id,
 	})
 }
