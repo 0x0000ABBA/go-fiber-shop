@@ -7,6 +7,8 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+//TODO idk what is going on here, this is kinda stupid, why would anyone need to GetAllUsers?
+
 // GetAllUsers returns all users
 // @Description Returns all users
 // @Error 500

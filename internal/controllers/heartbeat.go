@@ -8,7 +8,6 @@ import "github.com/gofiber/fiber/v2"
 // @Success 200 {string} string "Server is alive"
 // @Router /heartbeat [get]
 func GetHeartbeat(c *fiber.Ctx) error {
-    // Respond with a 204 No Content status code
     return c.Status(fiber.StatusOK).JSON(fiber.Map{
 		"message": "Server is alive",
 	})

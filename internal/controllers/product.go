@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"errors"
 	"fiber-shop/internal/data/models"
 	"fiber-shop/internal/services"
 	"fiber-shop/pkg/utils"
@@ -93,4 +94,10 @@ func PostProduct(c *fiber.Ctx) error {
 		"message":      "Product created successfully",
 		"product_id":   p.Id,
 	})
+}
+
+func GetProductPage(c *fiber.Ctx) error {
+	//TODO return page of products by page index
+	//google pagination
+	return errors.New("implement me")
 }

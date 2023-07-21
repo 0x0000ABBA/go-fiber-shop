@@ -15,18 +15,15 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	// "github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 )
-
 
 // @title Fiber Shop API
 // @version 1.0
 // @description This is a simple (yet) Shop api build using Fiber and Go.
 func main() {
-	JWT_SECRET := "jwt_secret" //FIXME this is stupid
 	//TODO make config load from env once before app started
-
-
 
 	log.Println("Initializing logger")
 
@@ -38,15 +35,11 @@ func main() {
 
 	a := fiber.New()
 
-
 	l.Println("App defined")
-
-
-	
 
 	pgCfg := pgsql.NewConfig("postgres", "Qweasdzxc4", "192.168.1.150", "5432", "store")
 
-	pgsql.NewGlClient(1, 1 * time.Second, pgCfg, l)
+	pgsql.NewGlClient(1, 1*time.Second, pgCfg, l)
 
 	defer pgsql.ConnPool.Close()
 
@@ -58,18 +51,17 @@ func main() {
 
 	l.Println(testConn.Query("SELECT * FROM public.user"))
 
-	l.Println("Middleware initializing")
+	JWT_SECRET := config.GetConfigValue("JWT_TOKEN")
 
+	l.Println("Middleware initializing")
 
 	a.Use(logger.New(logger.Config{
 		Format: "[${ip}]:${port} ${status} - ${method} ${path}\n",
 	}))
 	a.Use(cors.New())
 
-	
+	a.Use(middleware.JwtProtected(JWT_SECRET))
 
-	// a.Use(middleware.JwtProtected(JWT_SECRET))
-	
 	//TODO middlewares
 	//TODO auth middleware
 
@@ -95,3 +87,4 @@ func main() {
 	utils.StartServer(a, url, l)
 
 }
+
