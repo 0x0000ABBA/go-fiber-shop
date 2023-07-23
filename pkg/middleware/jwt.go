@@ -1,11 +1,13 @@
 package middleware
 
 import (
+	"net/http"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/jwt/v2"
 )
 
-func JwtProtected(secret string) func(*fiber.Ctx) error {
+func JwtProtected(secret string) fiber.Handler {
 
 	config := jwtware.Config{
 		SigningKey:   secret,
@@ -16,5 +18,7 @@ func JwtProtected(secret string) func(*fiber.Ctx) error {
 }
 
 func jwtError(c *fiber.Ctx, err error) error {
-	return nil
+	return c.Status(http.StatusUnauthorized).JSON(fiber.Map{
+		"message": "Corrupted or invalid jwt",
+	})
 }

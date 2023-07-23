@@ -9,5 +9,5 @@ import (
 func Registration(a *fiber.App) {
 
 	a.Post("/registration", controllers.Registration)
-
+	
 }
