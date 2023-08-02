@@ -5,7 +5,6 @@ import (
 	"fiber-shop/internal/routes"
 	"os"
 
-	"fiber-shop/pkg/middleware"
 	"fiber-shop/pkg/pgsql"
 	"fiber-shop/pkg/utils"
 	"log"
@@ -51,16 +50,14 @@ func main() {
 
 	l.Println(testConn.Query("SELECT * FROM public.user"))
 
-	JWT_SECRET := config.GetConfigValue("JWT_TOKEN")
 
 	l.Println("Middleware initializing")
 
 	a.Use(logger.New(logger.Config{
 		Format: "[${ip}]:${port} ${status} - ${method} ${path}\n",
 	}))
+	
 	a.Use(cors.New())
-
-	a.Use(middleware.JwtProtected(JWT_SECRET))
 
 	//TODO middlewares
 	//TODO auth middleware

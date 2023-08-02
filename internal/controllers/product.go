@@ -46,7 +46,7 @@ func GetProductById(c *fiber.Ctx) error {
 	product, err := services.GetProductById(id)
 
 	if err != nil {
-		if err == services.ErrorProductNotFound {
+		if err == utils.ErrorProductNotFound {
 			return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
 				"message": "Product not found",
 			})
