@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS public.user (
     email TEXT NOT NULL,
     first_name TEXT NOT NULL,
     last_name TEXT NOT NULL,
-    password TEXT NOT NULL, -- TODO mb make hash and salt -- 
+    password TEXT NOT NULL, -- TODO:mb make hash and salt -- 
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     deleted_at TIMESTAMP

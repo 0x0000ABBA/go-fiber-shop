@@ -8,7 +8,7 @@ import (
 
 func Authorization(c *fiber.Ctx) error {
 
-	// TODO send success code and jwt on successful login
+	// TODO:send success code and jwt on successful login
 
 	return errors.New("implement me")
 

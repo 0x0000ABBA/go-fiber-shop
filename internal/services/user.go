@@ -2,9 +2,9 @@ package services
 
 import (
 	"errors"
-	"fiber-shop/internal/data/models"
+	"fiber-shop/internal/models"
 
-	"golang.org/x/exp/slices" // TODO remove later
+	"golang.org/x/exp/slices" // TODO:remove later
 )
 
 var admin1 = models.User{Id: "8450c898-b2ff-4edd-927d-d9e9c620f871", FirstName: "admin", LastName: "admin", Email: "admin@admin.go", Password: "adminpword"}
@@ -15,7 +15,7 @@ var user2 = models.User{Id: "27e4857f-e67a-49de-b228-f10409f0f745", FirstName: "
 
 var users []models.User = []models.User{admin1, admin2, user1, user2}
 
-// TODO implement me
+// TODO:implement me
 func GetAllUsers() ([]models.User, error) {
 	return users, nil
 }
@@ -34,7 +34,7 @@ func GetUserById(id string) (models.User, error) {
 }
 
 func UserExists(email string) bool {
-	index := slices.IndexFunc[models.User](users, func(u models.User) bool { return u.Email == email }) // FIXME
+	index := slices.IndexFunc[models.User](users, func(u models.User) bool { return u.Email == email }) // FIXME:
 
 	return index != -1
 }

@@ -22,7 +22,7 @@ import (
 // @version 1.0
 // @description This is a simple (yet) Shop api build using Fiber and Go.
 func main() {
-	//TODO make config load from env once before app started
+	//TODO:make config load from env once before app started
 
 	log.Println("Initializing logger")
 
@@ -50,17 +50,16 @@ func main() {
 
 	l.Println(testConn.Query("SELECT * FROM public.user"))
 
-
 	l.Println("Middleware initializing")
 
 	a.Use(logger.New(logger.Config{
 		Format: "[${ip}]:${port} ${status} - ${method} ${path}\n",
 	}))
-	
+
 	a.Use(cors.New())
 
-	//TODO middlewares
-	//TODO auth middleware
+	//TODO:middlewares
+	//TODO:auth middleware
 
 	l.Println("Middleware initialized")
 
@@ -70,7 +69,7 @@ func main() {
 	routes.Metrics(a)
 	routes.User(a)
 
-	// TODO routes
+	// TODO:routes
 	l.Println("Routes initialized")
 
 	l.Println("Starting server")
@@ -84,4 +83,3 @@ func main() {
 	utils.StartServer(a, url, l)
 
 }
-

@@ -9,7 +9,7 @@ import (
 
 func GetConfigValue(key string) string {
 
-	//TODO add (?) check if all needed variables is in .env
+	//TODO: add (?) check if all needed variables is in .env
 	//idk how to implement this ^
 
 	err := godotenv.Load(".env")

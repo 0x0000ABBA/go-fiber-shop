@@ -15,6 +15,6 @@ func Product(a *fiber.App) {
 	a.Get("/all", controllers.GetAllProducts)
 	a.Get("/page/:page", controllers.GetProductPage)
 
-	a.Post("", middleware.JwtProtected("JWT_SECRET"), middlewares.AdminProtected(), controllers.PostProduct) // FIXME middleware should not depend on secret
+	a.Post("", middleware.JwtProtected("JWT_SECRET"), middlewares.AdminProtected(), controllers.PostProduct) // FIXME:middleware should not depend on secret
 	// mb move config.GetConfigValue inside jwtProtected
 }

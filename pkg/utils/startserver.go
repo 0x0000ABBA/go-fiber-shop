@@ -16,9 +16,9 @@ func StartServer(a *fiber.App, url string, l *log.Logger) {
 }
 
 // Starting server with graceful shutdown
-func StartServerWithGracefulShutdown(a *fiber.App, url string, l *log.Logger) { // TODO fix this
+func StartServerWithGracefulShutdown(a *fiber.App, url string, l *log.Logger) { // TODO:fix this
 
-	l.Printf("Starting server on %s",  url)
+	l.Printf("Starting server on %s", url)
 
 	idleConnsClosed := make(chan struct{})
 

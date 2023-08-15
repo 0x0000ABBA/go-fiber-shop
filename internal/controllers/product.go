@@ -2,7 +2,7 @@ package controllers
 
 import (
 	"errors"
-	"fiber-shop/internal/data/models"
+	"fiber-shop/internal/models"
 	"fiber-shop/internal/services"
 	"fiber-shop/pkg/utils"
 
@@ -76,7 +76,7 @@ func PostProduct(c *fiber.Ctx) error {
 		})
 	}
 
-	if product.Name == "" || product.Prices == nil { // TODO validation
+	if product.Name == "" || product.Prices == nil { // TODO:validation
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"message": "Name and price is required",
 		})
@@ -91,13 +91,13 @@ func PostProduct(c *fiber.Ctx) error {
 	}
 
 	return c.Status(fiber.StatusCreated).JSON(fiber.Map{
-		"message":      "Product created successfully",
-		"product_id":   p.Id,
+		"message":    "Product created successfully",
+		"product_id": p.Id,
 	})
 }
 
 func GetProductPage(c *fiber.Ctx) error {
-	//TODO return page of products by page index
+	//TODO:return page of products by page index
 	//google pagination
 	return errors.New("implement me")
 }
